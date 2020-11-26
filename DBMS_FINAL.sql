@@ -5,7 +5,7 @@ use vehicle_insurance;
 CREATE TABLE IF NOT EXISTS G9_CUSTOMER(
 G9_T1_Cust_Id INT NOT NULL,
 G9_T1_Cust_FName VARCHAR(40) NOT NULL ,
-G9_T1_Cust_LName VARCHAR(40) NULL ,
+G9_T1_Cust_LName VARCHAR(40) NULL,
 G9_T1_Cust_DOB DATE NOT NULL,
 G9_T1_Cust_Gender CHAR(2) NOT NULL ,
 G9_T1_Cust_Address VARCHAR(80) NOT NULL,
@@ -112,7 +112,7 @@ G9_T3_Valid_From_Date DATE NOT NULL ,
 G9_T3_Valid_Till_Date DATE NOT NULL ,
 G9_T3_Description VARCHAR(200) NULL ,
 G9_T3_Coverage_Level VARCHAR(40) NULL ,
-G9_T3_Application_Id  VARCHAR(15) UNIQUE,
+G9_T3_Application_Id  VARCHAR(15) NOT NULL ,
 G9_T3_Cust_Id INT NOT NULL ,
 CONSTRAINT G9_T3_QU0TE PRIMARY KEY
 (G9_T3_Quote_Id,G9_T3_Application_Id,G9_T3_Cust_Id),
@@ -150,7 +150,7 @@ G9_T4_Policy_Number VARCHAR(40) NOT NULL ,
 G9_T4_Start_Date DATE NULL ,
 G9_T4_Expiry_Date DATE NULL ,
 G9_T4_T_C_Description VARCHAR(200) NULL ,
-G9_T4_Application_Id  VARCHAR(15) UNIQUE ,
+G9_T4_Application_Id  VARCHAR(15) NOT NULL,
 G9_T4_Cust_Id INT NOT NULL ,
 CONSTRAINT G9_T4_INSURANCE_POLICY PRIMARY KEY (G9_T4_Agreement_Id,G9_T4_Application_Id,G9_T4_Cust_Id),
 CONSTRAINT G9_T4_FK_APP FOREIGN KEY (G9_T4_Application_Id, G9_T4_Cust_Id) REFERENCES
@@ -328,11 +328,11 @@ INSERT INTO G9_CLAIM VALUES (985, '9IP008', '298000', '9IN014', 'An accident has
 CREATE TABLE  IF NOT EXISTS G9_CLAIM_SETTLEMENT
 (
 G9_T8_Claim_Settlement_Id INT NOT NULL,
-G9_T8_Vehicle_Id INT UNIQUE ,
+G9_T8_Vehicle_Id INT NOT NULL,
 G9_T8_Date_Settled DATE NOT NULL ,
 G9_T8_Amount_Paid INT NOT NULL ,
 G9_T8_Coverage_Id VARCHAR(15) NULL ,
-G9_T8_Claim_Id INT UNIQUE,
+G9_T8_Claim_Id INT NOT NULL,
 G9_T8_Cust_Id INT NOT NULL ,
 CONSTRAINT G9_T8_CLAIM_SETTLEMENT PRIMARY KEY (G9_T8_Claim_Settlement_Id,G9_T8_Claim_Id,G9_T8_Cust_Id),
 CONSTRAINT G9_T8_FK_CLAIM FOREIGN KEY (G9_T8_Claim_Id, G9_T8_Cust_Id) REFERENCES G9_CLAIM
@@ -351,8 +351,8 @@ INSERT INTO G9_CLAIM_SETTLEMENT  VALUES (995, 945, '2019-12-20', 298000, '9CO015
 # --------------table-9 Insurance_company
 CREATE TABLE IF NOT EXISTS G9_INSURANCE_COMPANY (
 G9_T9_Company_Name VARCHAR(80) NOT NULL,
-G9_T9_Company_Address VARCHAR(100) NULL ,
-G9_T9_Company_Contact_Number BIGINT NULL ,
+G9_T9_Company_Address VARCHAR(100) NULL,
+G9_T9_Company_Contact_Number BIGINT NULL,
 G9_T9_Company_Fax BIGINT NULL ,
 G9_T9_Company_Email VARCHAR(80) UNIQUE ,
 G9_T9_Company_Website VARCHAR(90) NULL ,
@@ -533,7 +533,7 @@ CREATE TABLE IF NOT EXISTS G9_POLICY_RENEWABLE
 (
 G9_T13_Policy_Renewable_Id VARCHAR(15) NOT NULL,
 G9_T13_Agreement_Id VARCHAR(15) NOT NULL ,
-G9_T13_Application_Id VARCHAR(15) UNIQUE,
+G9_T13_Application_Id VARCHAR(15) NOT NULL,
 G9_T13_Cust_Id INT NOT NULL ,
 G9_T13_Date_Of_Renewal DATE NOT NULL ,
 G9_T13_Type_Of_Renewal VARCHAR(40) NOT NULL ,
@@ -676,7 +676,7 @@ INSERT INTO G9_OFFICE  VALUES("Geico General life Insurance","9DE012","Geico Gen
 CREATE TABLE IF NOT EXISTS G9_RECEIPT
 (
 G9_T17_Receipt_Id VARCHAR(12) NOT NULL,
-G9_T17_Premium_Payment_Id VARCHAR(12) UNIQUE ,
+G9_T17_Premium_Payment_Id VARCHAR(12) NOT NULL ,
 G9_T17_Cust_Id INT NOT NULL ,
 G9_T17_Cost INT NOT NULL ,
 G9_T17_Time DATE NULL ,
@@ -709,10 +709,10 @@ INSERT INTO G9_RECEIPT VALUES ('9RE016', '9PPID016', 917,2999,'2015-12-05');
 
 #-----------------table-18 Insurance_policy_coverage
 CREATE TABLE G9_INSURANCE_POLICY_COVERAGE  (
-G9_T18_Agreement_Id VARCHAR(12) UNIQUE ,
-G9_T18_Application_Id VARCHAR(12) UNIQUE,
+G9_T18_Agreement_Id VARCHAR(12) NOT NULL ,
+G9_T18_Application_Id VARCHAR(12) NOT NULL,
 G9_T18_Cust_Id INT NOT NULL ,
-G9_T18_Coverage_Id VARCHAR(12) UNIQUE,
+G9_T18_Coverage_Id VARCHAR(12) NOT NULL,
 G9_T18_Company_Name VARCHAR(70) NOT NULL,
 CONSTRAINT G9_T18_INSURANCE_POLICY_COVERAGE PRIMARY KEY
 (G9_T18_Agreement_Id,G9_T18_Application_Id,G9_T18_Cust_Id,G9_T18_Coverage_Id,G9_T18_Company_Name),
@@ -746,7 +746,7 @@ Insert into G9_INSURANCE_POLICY_COVERAGE values ("9IP015","9AP025",918,"9CO017",
 CREATE TABLE G9_PRODUCT
 (
 G9_T19_Product_Number VARCHAR(12) NOT NULL,
-G9_T19_Company_Name VARCHAR(70) ,
+G9_T19_Company_Name VARCHAR(70) NOT NULL,
 G9_T19_Product_Type VARCHAR(60) NULL ,
 G9_T19_Product_Price VARCHAR(8) NULL ,
 CONSTRAINT G9_T19_PRODUCT PRIMARY KEY (G9_T19_Product_Number,G9_T19_Company_Name),
@@ -781,17 +781,6 @@ INSERT INTO G9_PRODUCT VALUES ('9PN023', 'Bharti Axa Insurance Company', 'third 
 INSERT INTO G9_PRODUCT VALUES ('9PN024', "Geico General Insurance Company", 'Comprehensive', '3249');
 INSERT INTO G9_PRODUCT VALUES ('9PN025', 'Bharti Axa Insurance Company', 'Medical Payments', '4000');
 #-----------------------------------------------***********************-----------------------------------------------------#
-
-
-
-
-
-
-
-
-
-
-
 
 
 
