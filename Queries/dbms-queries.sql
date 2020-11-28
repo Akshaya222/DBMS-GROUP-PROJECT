@@ -29,7 +29,7 @@ count(distinct P.G9_T19_Product_Number)>count(distinct D.G9_T11_Department_Name)
 
 4.SELECT * FROM G9_CUSTOMER where G9_T1_Cust_Id IN 
 (SELECT G9_T6_Cust_Id  FROM G9_VEHICLE
-GROUP BY ( G9_T6_Cust_Id)
+GROUP BY (G9_T6_Cust_Id)
 HAVING count(G9_T6_Vehicle_Id) >=2
 AND G9_T6_Cust_Id IN
 ( SELECT G9_T5_Cust_Id FROM G9_PREMIUM_PAYMENT WHERE G9_T5_Premium_Payment_Amount = 0)

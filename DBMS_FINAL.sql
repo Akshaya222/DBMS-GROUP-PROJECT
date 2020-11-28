@@ -2,7 +2,7 @@ create database vehicle_insurance;
 use vehicle_insurance;
 # ------Table-1 G9_Customer
 #-----------Cust_Id 901-935------------
-CREATE TABLE IF NOT EXISTS G9_CUSTOMER(
+/*CREATE TABLE IF NOT EXISTS G9_CUSTOMER(
 G9_T1_Cust_Id INT NOT NULL,
 G9_T1_Cust_FName VARCHAR(40) NOT NULL ,
 G9_T1_Cust_LName VARCHAR(40) NULL,
@@ -779,9 +779,11 @@ INSERT INTO G9_PRODUCT VALUES ('9PN021', "Allstate General Insurance Company", '
 INSERT INTO G9_PRODUCT VALUES ('9PN022', "Geico General Insurance Company", 'third party', '3749');
 INSERT INTO G9_PRODUCT VALUES ('9PN023', 'Bharti Axa Insurance Company', 'third party', '4999');
 INSERT INTO G9_PRODUCT VALUES ('9PN024', "Geico General Insurance Company", 'Comprehensive', '3249');
-INSERT INTO G9_PRODUCT VALUES ('9PN025', 'Bharti Axa Insurance Company', 'Medical Payments', '4000');
+INSERT INTO G9_PRODUCT VALUES ('9PN025', 'Bharti Axa Insurance Company', 'Medical Payments', '4000');*/
 #-----------------------------------------------***********************-----------------------------------------------------#
 
+select  *  from G9_CUSTOMER where G9_T1_Cust_Id IN (select G9_T5_Cust_Id from G9_PREMIUM_PAYMENT
+where G9_T5_Premium_Payment_Amount > (select sum(G9_T1_Cust_Id ) from G9_CUSTOMER));
 
 
 
